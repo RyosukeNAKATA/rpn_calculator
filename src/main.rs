@@ -5,10 +5,14 @@ use std::io::{stdin, BufRead, BufReader};
 struct RpnCalculator(bool);
 
 impl RpnCalculator {
+    // 以下のコメントによる説明はRust Bu Example(https://doc.rust-jp.rs/rust-by-example-ja/fn/methods.html)より
+    // これは特定の型（この場合は RpnCalculator）に関連した関数なので関連関数(associated function)
+    // `Self`は呼び出し元オブジェクトの型。この場合は`RpnCalculator`。
     pub fn new(verbose: bool) -> Self {
         Self(verbose)
     }
 
+    // こちらはメソッド。`&self`は`self: &Self`のシンタックスシュガー
     pub fn eval(&self, formula: &str) -> i32 {
         let mut tokens = formula.split_whitespace().rev().collect::<Vec<_>>();
         self.eval_inner(&mut tokens)
